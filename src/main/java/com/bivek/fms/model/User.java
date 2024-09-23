@@ -19,8 +19,9 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(name = "phone_number", nullable = false, unique = true)
+    @Column(name = "phone_number", nullable = false, unique = false)
     private String phoneNumber;
+
     // Getters and Setters
     public int getId() {
         return id;
