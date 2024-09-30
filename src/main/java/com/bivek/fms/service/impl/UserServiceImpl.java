@@ -4,8 +4,8 @@ import com.bivek.fms.model.User;
 import com.bivek.fms.repo.UserRepository;
 import com.bivek.fms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -13,6 +13,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return "Email already exists. Please choose another one.";
         }
+
         // Encrypt the password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         // Save the user to the database
@@ -48,6 +50,6 @@ public class UserServiceImpl implements UserService {
             return passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword());
         }
 
-        return false; // Return false if user does not exist or password does not match
+        return false;
     }
 }

@@ -5,21 +5,24 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "users")
-public class User {
+
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false, unique = true)
     private String email;
-    @Column(name = "phone_number", nullable = false, unique = false)
     private String phoneNumber;
 
     // Getters and Setters
@@ -61,5 +64,11 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
     }
 }
