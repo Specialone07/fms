@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Budget</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Create New Budget</h1>
+    <form th:action="@{/budgets/create(userId=${user.id})}" th:object="${budget}" method="post">
+        <!-- Budget Name Input -->
+        <div class="form-group">
+            <label for="name">Budget Name:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+
+        <!-- Amount Input -->
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" th:field="*{amount}" class="form-control" required>
+        </div>
+
+        <!-- Description Input -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" class="form-control" required></textarea>
+        </div>
+
+        <!-- Hidden Input for user.id -->
+        <input type="hidden" th:field="*{user.id}" th:value="${user.id}"/>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Create Budget</button>
+        <a href="/budgets" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
